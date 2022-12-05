@@ -28,6 +28,11 @@ class DiscordSDKUser : public RefCounted {
         String get_avatar();
         void set_bot(bool bot);
         bool get_bot();
+
+        DiscordSDKUser() {}
+        DiscordSDKUser(discord::User usr) {
+            user = usr;
+        }
 };
 
 #endif // DISCORD_SDK_USER_H
