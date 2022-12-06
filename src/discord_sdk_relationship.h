@@ -2,6 +2,7 @@
 #define DISCORD_SDK_RELATIONSHIP_H
 
 #include "discord_sdk_user.h"
+#include "discord_sdk_activity.h"
 
 #include "discord-sdk/types.h"
 
@@ -39,6 +40,7 @@ class DiscordSDKRelationship : public RefCounted {
         RelationshipType get_type();
         DiscordSDKUser *get_user();
         Status get_status();
+        DiscordSDKActivity *get_activity();
 
         DiscordSDKRelationship() {}
         DiscordSDKRelationship(discord::Relationship rel) {

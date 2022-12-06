@@ -5,6 +5,7 @@ void DiscordSDKRelationship::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_type"), &DiscordSDKRelationship::get_type);
 	ClassDB::bind_method(D_METHOD("get_user"), &DiscordSDKRelationship::get_user);
 	ClassDB::bind_method(D_METHOD("get_status"), &DiscordSDKRelationship::get_status);
+    ClassDB::bind_method(D_METHOD("get_activity"), &DiscordSDKRelationship::get_activity);
 
     BIND_ENUM_CONSTANT(None);
     BIND_ENUM_CONSTANT(Friend);
@@ -29,4 +30,8 @@ DiscordSDKUser *DiscordSDKRelationship::get_user() {
 
 DiscordSDKRelationship::Status DiscordSDKRelationship::get_status() {
     return static_cast<Status>(relationship.GetPresence().GetStatus());
+}
+
+DiscordSDKActivity *DiscordSDKRelationship::get_activity() {
+    return memnew(DiscordSDKActivity(relationship.GetPresence().GetActivity()));
 }
