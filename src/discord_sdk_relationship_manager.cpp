@@ -29,6 +29,7 @@ void DiscordSDKRelationshipManager::_bind_methods() {
 
 void DiscordSDKRelationshipManager::filter(Callable condition) {
 	ERR_FAIL_COND_MSG(!DiscordSDK::get_singleton()->core, DISCORD_SDK_ERR_NOT_INIT);
+
 	DiscordSDK::get_singleton()->core->RelationshipManager().Filter([=](const discord::Relationship &relationship) {
 		Array args;
 		args.append(memnew(DiscordSDKRelationship(relationship)));

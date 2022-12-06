@@ -12,12 +12,12 @@ using namespace godot;
 class DiscordSDKActivity : public RefCounted {
     GDCLASS(DiscordSDKActivity, RefCounted);
 
-    discord::Activity activity{};
-
     protected:
         static void _bind_methods();
     
     public:
+        discord::Activity activity{};
+
         int64_t get_application_id();
         String get_name();
 
