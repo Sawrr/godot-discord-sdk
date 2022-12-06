@@ -13,8 +13,7 @@ namespace discord {
 
 class AchievementEvents final {
 public:
-    static void DISCORD_CALLBACK OnUserAchievementUpdate(void* callbackData,
-                                                         DiscordUserAchievement* userAchievement)
+    static void OnUserAchievementUpdate(void* callbackData, DiscordUserAchievement* userAchievement)
     {
         auto* core = reinterpret_cast<Core*>(callbackData);
         if (!core) {
