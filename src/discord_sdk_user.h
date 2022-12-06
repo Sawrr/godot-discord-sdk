@@ -18,8 +18,8 @@ class DiscordSDKUser : public RefCounted {
         static void _bind_methods();
     
     public:
-        void set_id(long long id);
-        long long get_id();
+        void set_id(int64_t id);
+        int64_t get_id();
         void set_username(String username);
         String get_username();
         void set_discriminator(String discriminator);

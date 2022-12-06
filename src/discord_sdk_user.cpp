@@ -23,11 +23,11 @@ void DiscordSDKUser::_bind_methods() {
     ADD_PROPERTY(PropertyInfo(Variant::BOOL, "bot"), "set_bot", "get_bot");
 }
 
-void DiscordSDKUser::set_id(long long id) {
+void DiscordSDKUser::set_id(int64_t id) {
     user.SetId(id);
 }
 
-long long DiscordSDKUser::get_id() {
+int64_t DiscordSDKUser::get_id() {
     return user.GetId();
 }
 

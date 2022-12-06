@@ -34,7 +34,7 @@ DiscordSDKUser *DiscordSDKUserManager::get_current_user() {
 	return memnew(DiscordSDKUser(currentUser));
 }
 
-void DiscordSDKUserManager::get_user(long long user_id, Callable callback) {
+void DiscordSDKUserManager::get_user(int64_t user_id, Callable callback) {
 	ERR_FAIL_COND_MSG(!DiscordSDK::get_singleton()->core, DISCORD_SDK_ERR_NOT_INIT);
 	
 	DiscordSDK::get_singleton()->core->UserManager().GetUser(user_id, [=](discord::Result result, const discord::User &user) {

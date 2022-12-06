@@ -86,7 +86,10 @@ void DiscordSDK::_bind_methods() {
 DiscordSDK::Result DiscordSDK::initialize(int64_t clientId, CreateFlags flags) {
     DiscordSDK::Result result = static_cast<DiscordSDK::Result>(discord::Core::Create(clientId, flags, &core));
     return result;
+    // TODO if bad result, should we set core to nullptr?
 }
+
+// TODO should we add is_initialized() method ?
 
 void DiscordSDK::set_log_hook(LogLevel logLevel, Callable callback) {
     ERR_FAIL_COND_MSG(!core, DISCORD_SDK_ERR_NOT_INIT);

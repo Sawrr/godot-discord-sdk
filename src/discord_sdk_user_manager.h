@@ -23,7 +23,7 @@ protected:
 public:
 	static DiscordSDKUserManager *get_singleton();
 	DiscordSDKUser *get_current_user();
-	void get_user(long long user_id, Callable callback);
+	void get_user(int64_t user_id, Callable callback);
 	void on_current_user_update(Callable callback);
 
 	DiscordSDKUserManager();
