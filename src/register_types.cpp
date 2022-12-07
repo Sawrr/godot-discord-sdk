@@ -14,6 +14,8 @@
 #include "discord_sdk_relationship_manager.h"
 #include "discord_sdk_activity.h"
 #include "discord_sdk_activity_manager.h"
+#include "discord_sdk_lobby.h"
+#include "discord_sdk_lobby_transaction.h"
 
 using namespace godot;
 
@@ -34,6 +36,9 @@ void initialize_discord_module(ModuleInitializationLevel p_level) {
 	ClassDB::register_class<DiscordSDKRelationshipManager>();
 	ClassDB::register_class<DiscordSDKActivity>();
 	ClassDB::register_class<DiscordSDKActivityManager>();
+	ClassDB::register_class<DiscordSDKLobby>();
+	ClassDB::register_class<DiscordSDKLobbyTransaction>();
+
 
 	_discord = memnew(DiscordSDK);
 	_discordUserManager = memnew(DiscordSDKUserManager);
