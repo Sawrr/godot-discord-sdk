@@ -12,7 +12,7 @@ jobs:
       - name: Get Discord GameSDK and extract libs
         run: |
           curl https://dl-game-sdk.discordapp.net/2.5.6/discord_game_sdk.zip --output discord_game_sdk.zip
-          7z x discord_game_sdk.zip -o sdk
+          7z x discord_game_sdk.zip -osdk
           mkdir addons/discord/bin
           cp sdk/discord_game_sdk/lib/x64_86/* addons/discord/bin/
       - name: Install Build Requirements
