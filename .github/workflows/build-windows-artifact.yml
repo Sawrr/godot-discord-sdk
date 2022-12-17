@@ -18,7 +18,7 @@ jobs:
           dir
           mkdir addons/discord/bin
           dir
-          robocopy discord_game_sdk/lib/x64_86 addons/discord/bin
+          robocopy discord_game_sdk/lib/x86_64 addons/discord/bin
       - name: Install Build Requirements
         run: |
           python --version
