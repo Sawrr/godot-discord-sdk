@@ -8,13 +8,16 @@ jobs:
       - name: Checkout discord-gdextension
         uses: actions/checkout@v3
         with:
+          path: "repo"
           submodules: recursive
       - name: Get Discord GameSDK and extract libs
         run: |
           curl https://dl-game-sdk.discordapp.net/2.5.6/discord_game_sdk.zip --output discord_game_sdk.zip
           7z x discord_game_sdk.zip -osdk
-          mkdir addons/discord/bin
-          cp sdk/lib/x64_86/* addons/discord/bin/
+          chdir
+          dir
+          mkdir repo/addons/discord/bin
+          cp sdk/lib/x64_86/* repo/addons/discord/bin/
       - name: Install Build Requirements
         run: |
           python --version
@@ -27,5 +30,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: windows_64
-          path: addons/
+          path: repo/addons/
           retention-days: 1
