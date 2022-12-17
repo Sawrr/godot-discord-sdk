@@ -14,14 +14,15 @@ Only some features are implemented as much of the SDK is deprecated.
 - Activity
   - Rich Presence
   - Invites, Ask to Join
+  - Register application launch command / steam id
 - Relationship
   - Get friends list
 - User
-  - Get user info, such as name and avatar
+  - Get user info, such as name and avatar URL
 
 ## How to build
 
-1. Download the [Discord GameSDK](https://discord.com/developers/docs/game-sdk/sdk-starter-guide#step-1-get-the-thing) and copy the libs for your platform(s) from `discord_game_sdk_v2.5.6/lib/x86_64/` to `src/discord-sdk/bin`
+1. Download the [Discord GameSDK](https://discord.com/developers/docs/game-sdk/sdk-starter-guide#step-1-get-the-thing) and copy the libs for your platform(s) from `discord_game_sdk_v2.5.6/lib/x86_64/` to `src/addons/discord/bin/`
 2. Initialize and update the git submodule [godot_cpp](https://github.com/godotengine/godot-cpp) to the commit id that corresponds to your version of Godot. This step is to ensure the C++ bindings match.
 3. Build the extension using `scons` [More info here](https://docs.godotengine.org/en/stable/development/compiling/introduction_to_the_buildsystem.html)
 4. Copy `addons/` folder into your Godot project
@@ -45,15 +46,16 @@ Initialize Discord using your app id:
     
     var discord_ready = true
 
-Run callbacks every tick:
+then run callbacks every tick:
 
     func _process(_delta):
         if discord_ready:
             Discord.run_callbacks()
 
 
+Note: you can use lambda functions for callbacks
 
-### Use lambda functions for callbacks
+### Examples
 
 Logging:
 
