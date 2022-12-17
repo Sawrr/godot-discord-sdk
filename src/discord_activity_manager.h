@@ -37,6 +37,7 @@ public:
 	static sdk::DiscordActivityManager *get_singleton();
 
 	Discord::Result register_command(String command);
+	Discord::Result register_steam(uint32_t steam_id);
 	void update_activity(Ref<sdk::DiscordActivity> activity, Callable callback);
 	void clear_activity(Callable callback);
 	void send_request_reply(int64_t user_id, ActivityJoinRequestReply reply, Callable callback);

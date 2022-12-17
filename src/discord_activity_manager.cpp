@@ -30,6 +30,7 @@ void sdk::DiscordActivityManager::_bind_methods() {
 	BIND_ENUM_CONSTANT(Spectate);
 	
 	ClassDB::bind_method(D_METHOD("register_command", "command"), &sdk::DiscordActivityManager::register_command);
+	ClassDB::bind_method(D_METHOD("register_steam", "steam_id"), &sdk::DiscordActivityManager::register_steam);
 	ClassDB::bind_method(D_METHOD("update_activity", "activity", "callback"), &sdk::DiscordActivityManager::update_activity);
 	ClassDB::bind_method(D_METHOD("clear_activity", "callback"), &sdk::DiscordActivityManager::clear_activity);
 	ClassDB::bind_method(D_METHOD("send_request_reply", "user_id", "reply", "callback"), &sdk::DiscordActivityManager::send_request_reply);
@@ -46,6 +47,12 @@ Discord::Result sdk::DiscordActivityManager::register_command(String command) {
 	ERR_FAIL_COND_V_MSG(!Discord::get_singleton()->core, static_cast<Discord::Result>(-1), DISCORD_SDK_ERR_NOT_INIT);
 
 	return static_cast<Discord::Result>(Discord::get_singleton()->core->ActivityManager().RegisterCommand(command.utf8().get_data()));
+}
+
+Discord::Result sdk::DiscordActivityManager::register_steam(uint32_t steam_id) {
+	ERR_FAIL_COND_V_MSG(!Discord::get_singleton()->core, static_cast<Discord::Result>(-1), DISCORD_SDK_ERR_NOT_INIT);
+
+	return static_cast<Discord::Result>(Discord::get_singleton()->core->ActivityManager().RegisterSteam(steam_id));
 }
 
 void sdk::DiscordActivityManager::update_activity(Ref<sdk::DiscordActivity> activity, Callable callback) {
