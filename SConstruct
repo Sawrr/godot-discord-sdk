@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import os
 import sys
+from glob import glob
+from pathlib import Path
 
 env = SConscript("./godot-cpp/SConstruct")
 
@@ -24,16 +26,31 @@ if env["platform"] == "windows":
 else:
     env.Append(LIBS=["discord_game_sdk"])
 
+(extension_path,) = glob("addons/*/*.gdextension")
+addon_path = Path(extension_path).parent
+project_name = Path(extension_path).stem
+debug_or_release = "release" if env["target"] == "template_release" else "template_debug"
+
 if env["platform"] == "macos":
     library = env.SharedLibrary(
-        "addons/discord/bin/libgddiscord.{}.{}.framework/libgddiscord.{}.{}".format(
-            env["platform"], env["target"], env["platform"], env["target"]
+        "{0}/bin/libgd{1}.{2}.{3}.framework/{1}.{2}.{3}".format(
+            addon_path,
+            project_name,
+            env["platform"],
+            debug_or_release,
         ),
         source=sources,
     )
 else:
     library = env.SharedLibrary(
-        "addons/discord/bin/libgddiscord{}{}".format(env["suffix"], env["SHLIBSUFFIX"]),
+        "{}/bin/libgd{}.{}.{}.{}{}".format(
+            addon_path,
+            project_name,
+            env["platform"],
+            debug_or_release,
+            env["arch"],
+            env["SHLIBSUFFIX"],
+        ),
         source=sources,
     )
 
