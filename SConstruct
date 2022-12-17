@@ -16,23 +16,24 @@ env = SConscript("./godot-cpp/SConstruct")
 env.Append(CPPPATH=["src/"])
 sources = [Glob("src/*.cpp"), Glob("src/**/*.cpp")]
 
-# Set library name
-env.Append(GDEXTENSION_LIB_NAME="discord")
-
 # Add discord sdk binary
-env.Append(LIBS=["discord_game_sdk.dll"])
 env.Append(LIBPATH=["addons/discord/bin/"])
+
+if env["platform"] == "windows":
+    env.Append(LIBS=["discord_game_sdk.dll"])
+else:
+    env.Append(LIBS=["discord_game_sdk"])
 
 if env["platform"] == "macos":
     library = env.SharedLibrary(
-        "addons/{}/bin/libgd{}.{}.{}.framework/libgd{}.{}.{}".format(
-            env["GDEXTENSION_LIB_NAME"], env["GDEXTENSION_LIB_NAME"], env["platform"], env["target"], env["GDEXTENSION_LIB_NAME"], env["platform"], env["target"]
+        "addons/discord/bin/libgddiscord.{}.{}.framework/libgddiscord.{}.{}".format(
+            env["platform"], env["target"], env["platform"], env["target"]
         ),
         source=sources,
     )
 else:
     library = env.SharedLibrary(
-        "addons/{}/bin/libgd{}{}{}".format(env["GDEXTENSION_LIB_NAME"], env["GDEXTENSION_LIB_NAME"], env["suffix"], env["SHLIBSUFFIX"]),
+        "addons/discord/bin/libgddiscord{}{}".format(env["suffix"], env["SHLIBSUFFIX"]),
         source=sources,
     )
 
