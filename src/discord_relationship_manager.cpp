@@ -1,4 +1,4 @@
-#include "discord_sdk_relationship_manager.h"
+#include "discord_relationship_manager.h"
 
 using namespace godot;
 

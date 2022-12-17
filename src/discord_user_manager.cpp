@@ -1,4 +1,4 @@
-#include "discord_sdk_user_manager.h"
+#include "discord_user_manager.h"
 
 using namespace godot;
 

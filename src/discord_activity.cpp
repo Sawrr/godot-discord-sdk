@@ -1,5 +1,5 @@
 
-#include "discord_sdk_activity.h"
+#include "discord_activity.h"
 
 void sdk::DiscordActivity::_bind_methods() {
     ClassDB::bind_method(D_METHOD("get_application_id"), &sdk::DiscordActivity::get_application_id);

@@ -1,8 +1,8 @@
 #ifndef DISCORD_SDK_RELATIONSHIP_H
 #define DISCORD_SDK_RELATIONSHIP_H
 
-#include "discord_sdk_user.h"
-#include "discord_sdk_activity.h"
+#include "discord_user.h"
+#include "discord_activity.h"
 
 #include "discord-sdk/types.h"
 

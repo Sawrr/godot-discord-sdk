@@ -1,5 +1,5 @@
 
-#include "discord_sdk_user.h"
+#include "discord_user.h"
 
 void sdk::DiscordUser::_bind_methods() {
     ClassDB::bind_method(D_METHOD("set_id", "id"), &sdk::DiscordUser::set_id);

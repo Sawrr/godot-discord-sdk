@@ -1,10 +1,10 @@
 #ifndef DISCORD_SDK_RELATIONSHIP_MANAGER_H
 #define DISCORD_SDK_RELATIONSHIP_MANAGER_H
 
-#include "discord_sdk_relationship.h"
+#include "discord_relationship.h"
 
 #include "discord-sdk/core.h"
-#include "discord_sdk.h"
+#include "discord.h"
 
 #include <godot_cpp/classes/object.hpp>
 #include <godot_cpp/core/class_db.hpp>

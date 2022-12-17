@@ -1,4 +1,4 @@
-#include "discord_sdk_activity_manager.h"
+#include "discord_activity_manager.h"
 
 using namespace godot;
 

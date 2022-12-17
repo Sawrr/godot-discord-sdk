@@ -1,5 +1,5 @@
 
-#include "discord_sdk_relationship.h"
+#include "discord_relationship.h"
 
 VARIANT_ENUM_CAST(sdk::DiscordRelationship, RelationshipType);
 VARIANT_ENUM_CAST(sdk::DiscordRelationship, Status);

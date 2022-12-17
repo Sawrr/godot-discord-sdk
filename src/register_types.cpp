@@ -7,13 +7,13 @@
 #include <godot_cpp/godot.hpp>
 #include <godot_cpp/classes/engine.hpp>
 
-#include "discord_sdk.h"
-#include "discord_sdk_user.h"
-#include "discord_sdk_user_manager.h"
-#include "discord_sdk_relationship.h"
-#include "discord_sdk_relationship_manager.h"
-#include "discord_sdk_activity.h"
-#include "discord_sdk_activity_manager.h"
+#include "discord.h"
+#include "discord_user.h"
+#include "discord_user_manager.h"
+#include "discord_relationship.h"
+#include "discord_relationship_manager.h"
+#include "discord_activity.h"
+#include "discord_activity_manager.h"
 
 using namespace godot;
 
