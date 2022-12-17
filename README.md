@@ -19,15 +19,16 @@ Only some features are implemented as much of the SDK is deprecated.
 - User
   - Get user info, such as name and avatar
 
-## How to compile
+## How to build
 
 1. Download the [Discord GameSDK](https://discord.com/developers/docs/game-sdk/sdk-starter-guide#step-1-get-the-thing) and copy the libs for your platform(s) from `discord_game_sdk_v2.5.6/lib/x86_64/` to `src/discord-sdk/bin`
-2. Build the extension using `scons` [More info here](https://docs.godotengine.org/en/stable/development/compiling/introduction_to_the_buildsystem.html)
-3. Copy `addons/` folder into your Godot project
+2. Initialize and update the git submodule [godot_cpp](https://github.com/godotengine/godot-cpp) to the commit id that corresponds to your version of Godot. This step is to ensure the C++ bindings match.
+3. Build the extension using `scons` [More info here](https://docs.godotengine.org/en/stable/development/compiling/introduction_to_the_buildsystem.html)
+4. Copy `addons/` folder into your Godot project
 
 ## How to use
 
-After copying the the `addons/` folder into your Godot project, the following singletons are available in GDScript
+After building and copying the the `addons/` folder into your Godot project, the following singletons are available in GDScript
 
 - `Discord`
 - `DiscordUserManager`
