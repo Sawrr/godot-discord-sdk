@@ -14,9 +14,6 @@
 #include "discord_sdk_relationship_manager.h"
 #include "discord_sdk_activity.h"
 #include "discord_sdk_activity_manager.h"
-#include "discord_sdk_lobby.h"
-#include "discord_sdk_lobby_transaction.h"
-#include "discord_sdk_lobby_manager.h"
 
 using namespace godot;
 
@@ -24,7 +21,6 @@ static DiscordSDK * _discord;
 static DiscordSDKUserManager * _discordUserManager;
 static DiscordSDKRelationshipManager * _discordRelationshipManager;
 static DiscordSDKActivityManager * _discordActivityManager;
-static DiscordSDKLobbyManager * _discordLobbyManager;
 
 void initialize_discord_module(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
@@ -38,20 +34,15 @@ void initialize_discord_module(ModuleInitializationLevel p_level) {
 	ClassDB::register_class<DiscordSDKRelationshipManager>();
 	ClassDB::register_class<DiscordSDKActivity>();
 	ClassDB::register_class<DiscordSDKActivityManager>();
-	ClassDB::register_class<DiscordSDKLobby>();
-	ClassDB::register_class<DiscordSDKLobbyTransaction>();
-	ClassDB::register_class<DiscordSDKLobbyManager>();
 
 	_discord = memnew(DiscordSDK);
 	_discordUserManager = memnew(DiscordSDKUserManager);
 	_discordRelationshipManager = memnew(DiscordSDKRelationshipManager);
 	_discordActivityManager = memnew(DiscordSDKActivityManager);
-	_discordLobbyManager = memnew(DiscordSDKLobbyManager);
 	Engine::get_singleton()->register_singleton("DiscordSDK", DiscordSDK::get_singleton());
 	Engine::get_singleton()->register_singleton("DiscordSDKUserManager", DiscordSDKUserManager::get_singleton());
 	Engine::get_singleton()->register_singleton("DiscordSDKRelationshipManager", DiscordSDKRelationshipManager::get_singleton());
 	Engine::get_singleton()->register_singleton("DiscordSDKActivityManager", DiscordSDKActivityManager::get_singleton());
-	Engine::get_singleton()->register_singleton("DiscordSDKLobbyManager", DiscordSDKLobbyManager::get_singleton());
 }
 
 void uninitialize_discord_module(ModuleInitializationLevel p_level) {
