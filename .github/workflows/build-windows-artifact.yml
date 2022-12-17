@@ -1,0 +1,29 @@
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    
+    steps:
+      - name: Checkout discord-gdextension
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Get Discord GameSDK and extract libs
+        run: |
+          curl https://dl-game-sdk.discordapp.net/2.5.6/discord_game_sdk.zip --output sdk.zip
+          7z x sdk.zip
+          mkdir addons/discord/bin
+          cp sdk/lib/x64_86/* addons/discord/bin/
+      - name: Install Build Requirements
+        run: |
+          python --version
+          python -m pip install scons
+          scons --version
+      - name: Build Windows
+        run: |
+          scons
+      - name: Upload Windows Build
+        uses: actions/upload-artifact@v3
+        with:
+          name: windows_64
+          path: addons/
+          retention-days: 1
