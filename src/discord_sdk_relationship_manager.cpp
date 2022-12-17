@@ -2,75 +2,75 @@
 
 using namespace godot;
 
-DiscordSDKRelationshipManager *DiscordSDKRelationshipManager::singleton = nullptr;
+sdk::DiscordRelationshipManager *sdk::DiscordRelationshipManager::singleton = nullptr;
 
-DiscordSDKRelationshipManager * DiscordSDKRelationshipManager::get_singleton() {
+sdk::DiscordRelationshipManager * sdk::DiscordRelationshipManager::get_singleton() {
     return singleton;
 }
 
-DiscordSDKRelationshipManager::DiscordSDKRelationshipManager() {
+sdk::DiscordRelationshipManager::DiscordRelationshipManager() {
     ERR_FAIL_COND(singleton != nullptr);
     singleton = this;
 }
 
-DiscordSDKRelationshipManager::~DiscordSDKRelationshipManager() {
+sdk::DiscordRelationshipManager::~DiscordRelationshipManager() {
     ERR_FAIL_COND(singleton != this);
     singleton = nullptr;
 }
 
-void DiscordSDKRelationshipManager::_bind_methods() {
-	ClassDB::bind_method(D_METHOD("filter", "condition"), &DiscordSDKRelationshipManager::filter);
-	ClassDB::bind_method(D_METHOD("get", "user_id"), &DiscordSDKRelationshipManager::get);
-	ClassDB::bind_method(D_METHOD("get_at", "index"), &DiscordSDKRelationshipManager::get_at);
-	ClassDB::bind_method(D_METHOD("count"), &DiscordSDKRelationshipManager::count);
-	ClassDB::bind_method(D_METHOD("on_refresh", "callback"), &DiscordSDKRelationshipManager::on_refresh);
-	ClassDB::bind_method(D_METHOD("on_relationship_update", "callback"), &DiscordSDKRelationshipManager::on_relationship_update);
+void sdk::DiscordRelationshipManager::_bind_methods() {
+	ClassDB::bind_method(D_METHOD("filter", "condition"), &sdk::DiscordRelationshipManager::filter);
+	ClassDB::bind_method(D_METHOD("get", "user_id"), &sdk::DiscordRelationshipManager::get);
+	ClassDB::bind_method(D_METHOD("get_at", "index"), &sdk::DiscordRelationshipManager::get_at);
+	ClassDB::bind_method(D_METHOD("count"), &sdk::DiscordRelationshipManager::count);
+	ClassDB::bind_method(D_METHOD("on_refresh", "callback"), &sdk::DiscordRelationshipManager::on_refresh);
+	ClassDB::bind_method(D_METHOD("on_relationship_update", "callback"), &sdk::DiscordRelationshipManager::on_relationship_update);
 }
 
-void DiscordSDKRelationshipManager::filter(Callable condition) {
-	ERR_FAIL_COND_MSG(!DiscordSDK::get_singleton()->core, DISCORD_SDK_ERR_NOT_INIT);
+void sdk::DiscordRelationshipManager::filter(Callable condition) {
+	ERR_FAIL_COND_MSG(!Discord::get_singleton()->core, DISCORD_SDK_ERR_NOT_INIT);
 
-	DiscordSDK::get_singleton()->core->RelationshipManager().Filter([=](const discord::Relationship &relationship) {
+	Discord::get_singleton()->core->RelationshipManager().Filter([=](const discord::Relationship &relationship) {
 		Array args;
-		args.append(memnew(DiscordSDKRelationship(relationship)));
+		args.append(memnew(sdk::DiscordRelationship(relationship)));
 		return condition.callv(args);
 	});
 }
 
-DiscordSDKRelationship *DiscordSDKRelationshipManager::get(int64_t user_id) {
-	ERR_FAIL_COND_V_MSG(!DiscordSDK::get_singleton()->core, nullptr, DISCORD_SDK_ERR_NOT_INIT);
+sdk::DiscordRelationship *sdk::DiscordRelationshipManager::get(int64_t user_id) {
+	ERR_FAIL_COND_V_MSG(!Discord::get_singleton()->core, nullptr, DISCORD_SDK_ERR_NOT_INIT);
 	
 	discord::Relationship relationship{};
-	discord::Result result = DiscordSDK::get_singleton()->core->RelationshipManager().Get(user_id, &relationship);
+	discord::Result result = Discord::get_singleton()->core->RelationshipManager().Get(user_id, &relationship);
 	ERR_FAIL_COND_V_MSG(result != discord::Result::Ok, nullptr, "Failed to retrieve Discord relationship of user_id.");
 
-	return memnew(DiscordSDKRelationship(relationship));
+	return memnew(sdk::DiscordRelationship(relationship));
 }
 
-DiscordSDKRelationship *DiscordSDKRelationshipManager::get_at(uint32_t index) {
-	ERR_FAIL_COND_V_MSG(!DiscordSDK::get_singleton()->core, nullptr, DISCORD_SDK_ERR_NOT_INIT);
+sdk::DiscordRelationship *sdk::DiscordRelationshipManager::get_at(uint32_t index) {
+	ERR_FAIL_COND_V_MSG(!Discord::get_singleton()->core, nullptr, DISCORD_SDK_ERR_NOT_INIT);
 	
 	discord::Relationship relationship{};
-	discord::Result result = DiscordSDK::get_singleton()->core->RelationshipManager().GetAt(index, &relationship);
+	discord::Result result = Discord::get_singleton()->core->RelationshipManager().GetAt(index, &relationship);
 	ERR_FAIL_COND_V_MSG(result != discord::Result::Ok, nullptr, "Failed to retrieve Discord relationship at index.");
 
-	return memnew(DiscordSDKRelationship(relationship));
+	return memnew(sdk::DiscordRelationship(relationship));
 }
 
-int32_t DiscordSDKRelationshipManager::count() {
-	ERR_FAIL_COND_V_MSG(!DiscordSDK::get_singleton()->core, -1, DISCORD_SDK_ERR_NOT_INIT);
+int32_t sdk::DiscordRelationshipManager::count() {
+	ERR_FAIL_COND_V_MSG(!Discord::get_singleton()->core, -1, DISCORD_SDK_ERR_NOT_INIT);
 
 	int32_t count;
-	discord::Result result =  DiscordSDK::get_singleton()->core->RelationshipManager().Count(&count);
+	discord::Result result =  Discord::get_singleton()->core->RelationshipManager().Count(&count);
 	ERR_FAIL_COND_V_MSG(result != discord::Result::Ok, -1, "Failed to retrieve Discord relationship count.");
 
 	return count;
 }
 
-void DiscordSDKRelationshipManager::on_refresh(Callable callback) {
-	ERR_FAIL_COND_MSG(!DiscordSDK::get_singleton()->core, DISCORD_SDK_ERR_NOT_INIT);
+void sdk::DiscordRelationshipManager::on_refresh(Callable callback) {
+	ERR_FAIL_COND_MSG(!Discord::get_singleton()->core, DISCORD_SDK_ERR_NOT_INIT);
 
-	DiscordSDK::get_singleton()->core->RelationshipManager().OnRefresh.Connect(
+	Discord::get_singleton()->core->RelationshipManager().OnRefresh.Connect(
 		[=]() {
 			Array args{};
 			callback.callv(args);
@@ -78,13 +78,13 @@ void DiscordSDKRelationshipManager::on_refresh(Callable callback) {
 	);
 }
 
-void DiscordSDKRelationshipManager::on_relationship_update(Callable callback) {
-	ERR_FAIL_COND_MSG(!DiscordSDK::get_singleton()->core, DISCORD_SDK_ERR_NOT_INIT);
+void sdk::DiscordRelationshipManager::on_relationship_update(Callable callback) {
+	ERR_FAIL_COND_MSG(!Discord::get_singleton()->core, DISCORD_SDK_ERR_NOT_INIT);
 
-	DiscordSDK::get_singleton()->core->RelationshipManager().OnRelationshipUpdate.Connect(
+	Discord::get_singleton()->core->RelationshipManager().OnRelationshipUpdate.Connect(
 		[=](discord::Relationship relationship) {
 			Array args{};
-			args.append(memnew(DiscordSDKRelationship(relationship)));
+			args.append(memnew(sdk::DiscordRelationship(relationship)));
 			callback.callv(args);
 		}
 	);

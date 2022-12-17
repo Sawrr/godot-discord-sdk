@@ -9,8 +9,10 @@
 
 using namespace godot;
 
-class DiscordSDKActivity : public RefCounted {
-    GDCLASS(DiscordSDKActivity, RefCounted);
+namespace sdk {
+
+class DiscordActivity : public RefCounted {
+    GDCLASS(DiscordActivity, RefCounted);
 
     protected:
         static void _bind_methods();
@@ -52,10 +54,12 @@ class DiscordSDKActivity : public RefCounted {
         bool get_instance();
         void set_instance(bool instance);
 
-        DiscordSDKActivity() {}
-        DiscordSDKActivity(discord::Activity act) {
+        DiscordActivity() {}
+        DiscordActivity(discord::Activity act) {
             activity = act;
         }
 };
+
+}
 
 #endif // DISCORD_SDK_ACTIVITY_H

@@ -1,7 +1,7 @@
 #ifndef DISCORD_SDK_H
 #define DISCORD_SDK_H
 
-#define DISCORD_SDK_ERR_NOT_INIT "Must call DiscordSDK.initialize() before calling other functions."
+#define DISCORD_SDK_ERR_NOT_INIT "Must call Discord.initialize() before calling other functions."
 
 #include "discord-sdk/core.h"
 
@@ -11,10 +11,10 @@
 
 using namespace godot;
 
-class DiscordSDK : public Object {
-	GDCLASS(DiscordSDK, Object);
+class Discord : public Object {
+	GDCLASS(Discord, Object);
 
-	static DiscordSDK *singleton;
+	static Discord *singleton;
 	discord::Core *core;
 
 protected:
@@ -86,14 +86,14 @@ public:
 	void set_log_hook(LogLevel logLevel, Callable callback);
 	Result run_callbacks();
 
-	static DiscordSDK *get_singleton();
+	static Discord *get_singleton();
 
-	DiscordSDK();
-	~DiscordSDK();
+	Discord();
+	~Discord();
 };
 
-VARIANT_ENUM_CAST(DiscordSDK, CreateFlags);
-VARIANT_ENUM_CAST(DiscordSDK, Result);
-VARIANT_ENUM_CAST(DiscordSDK, LogLevel);
+VARIANT_ENUM_CAST(Discord, CreateFlags);
+VARIANT_ENUM_CAST(Discord, Result);
+VARIANT_ENUM_CAST(Discord, LogLevel);
 
 #endif // DISCORD_SDK_H

@@ -12,11 +12,12 @@
 
 using namespace godot;
 
+namespace sdk {
 
-class DiscordSDKActivityManager : public Object {
-	GDCLASS(DiscordSDKActivityManager, Object);
+class DiscordActivityManager : public Object {
+	GDCLASS(DiscordActivityManager, Object);
 
-	static DiscordSDKActivityManager *singleton;
+	static sdk::DiscordActivityManager *singleton;
 
 protected:
 	static void _bind_methods();
@@ -33,10 +34,10 @@ public:
 	    Spectate
 	};
 	
-	static DiscordSDKActivityManager *get_singleton();
+	static sdk::DiscordActivityManager *get_singleton();
 
-	DiscordSDK::Result register_command(String command);
-	void update_activity(Ref<DiscordSDKActivity> activity, Callable callback);
+	Discord::Result register_command(String command);
+	void update_activity(Ref<sdk::DiscordActivity> activity, Callable callback);
 	void clear_activity(Callable callback);
 	void send_request_reply(int64_t user_id, ActivityJoinRequestReply reply, Callable callback);
 	void send_invite(int64_t user_id, ActivityActionType type, String content, Callable callback);
@@ -47,11 +48,10 @@ public:
 	void on_activity_join_request(Callable callback);
 	void on_activity_invite(Callable callback);
 
-	DiscordSDKActivityManager();
-	~DiscordSDKActivityManager();
+	DiscordActivityManager();
+	~DiscordActivityManager();
 };
 
-VARIANT_ENUM_CAST(DiscordSDKActivityManager, ActivityJoinRequestReply);
-VARIANT_ENUM_CAST(DiscordSDKActivityManager, ActivityActionType);
+}
 
 #endif // DISCORD_SDK_ACTIVITY_MANAGER_H

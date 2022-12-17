@@ -5,28 +5,28 @@
 
 using namespace godot;
 
-DiscordSDK *DiscordSDK::singleton = nullptr;
+Discord *Discord::singleton = nullptr;
 
-DiscordSDK * DiscordSDK::get_singleton() {
+Discord * Discord::get_singleton() {
     return singleton;
 }
 
-DiscordSDK::DiscordSDK() {
+Discord::Discord() {
     core = nullptr;
     ERR_FAIL_COND(singleton != nullptr);
     singleton = this;
 }
 
-DiscordSDK::~DiscordSDK() {
+Discord::~Discord() {
     core = nullptr;
     ERR_FAIL_COND(singleton != this);
     singleton = nullptr;
 }
 
-void DiscordSDK::_bind_methods() {
-    ClassDB::bind_method(D_METHOD("initialize", "client_id", "flags"), &DiscordSDK::initialize);
-    ClassDB::bind_method(D_METHOD("set_log_hook", "log_level", "callback"), &DiscordSDK::set_log_hook);
-    ClassDB::bind_method(D_METHOD("run_callbacks"), &DiscordSDK::run_callbacks);
+void Discord::_bind_methods() {
+    ClassDB::bind_method(D_METHOD("initialize", "client_id", "flags"), &Discord::initialize);
+    ClassDB::bind_method(D_METHOD("set_log_hook", "log_level", "callback"), &Discord::set_log_hook);
+    ClassDB::bind_method(D_METHOD("run_callbacks"), &Discord::run_callbacks);
 
     BIND_ENUM_CONSTANT(Default);
     BIND_ENUM_CONSTANT(NoRequireDiscord);
@@ -83,15 +83,15 @@ void DiscordSDK::_bind_methods() {
     BIND_ENUM_CONSTANT(Debug);
 }
 
-DiscordSDK::Result DiscordSDK::initialize(int64_t clientId, CreateFlags flags) {
-    DiscordSDK::Result result = static_cast<DiscordSDK::Result>(discord::Core::Create(clientId, flags, &core));
+Discord::Result Discord::initialize(int64_t clientId, CreateFlags flags) {
+    Discord::Result result = static_cast<Discord::Result>(discord::Core::Create(clientId, flags, &core));
     return result;
     // TODO if bad result, should we set core to nullptr?
 }
 
 // TODO should we add is_initialized() method ?
 
-void DiscordSDK::set_log_hook(LogLevel logLevel, Callable callback) {
+void Discord::set_log_hook(LogLevel logLevel, Callable callback) {
     ERR_FAIL_COND_MSG(!core, DISCORD_SDK_ERR_NOT_INIT);
 
     core->SetLogHook(static_cast<discord::LogLevel>(logLevel), [=](discord::LogLevel logLevel, const char * msg) {
@@ -102,8 +102,8 @@ void DiscordSDK::set_log_hook(LogLevel logLevel, Callable callback) {
     });
 }
 
-DiscordSDK::Result DiscordSDK::run_callbacks() {
-    ERR_FAIL_COND_V_MSG(!core, static_cast<DiscordSDK::Result>(-1), DISCORD_SDK_ERR_NOT_INIT);
+Discord::Result Discord::run_callbacks() {
+    ERR_FAIL_COND_V_MSG(!core, static_cast<Discord::Result>(-1), DISCORD_SDK_ERR_NOT_INIT);
 
-    return static_cast<DiscordSDK::Result>(core->RunCallbacks());
+    return static_cast<Discord::Result>(core->RunCallbacks());
 }

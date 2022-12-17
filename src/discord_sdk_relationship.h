@@ -12,8 +12,10 @@
 
 using namespace godot;
 
-class DiscordSDKRelationship : public RefCounted {
-    GDCLASS(DiscordSDKRelationship, RefCounted);
+namespace sdk {
+
+class DiscordRelationship : public RefCounted {
+    GDCLASS(DiscordRelationship, RefCounted);
 
     discord::Relationship relationship{};
 
@@ -38,17 +40,16 @@ class DiscordSDKRelationship : public RefCounted {
         };
 
         RelationshipType get_type();
-        DiscordSDKUser *get_user();
+        sdk::DiscordUser *get_user();
         Status get_status();
-        DiscordSDKActivity *get_activity();
+        sdk::DiscordActivity *get_activity();
 
-        DiscordSDKRelationship() {}
-        DiscordSDKRelationship(discord::Relationship rel) {
+        DiscordRelationship() {}
+        DiscordRelationship(discord::Relationship rel) {
             relationship = rel;
         }
 };
 
-VARIANT_ENUM_CAST(DiscordSDKRelationship, RelationshipType);
-VARIANT_ENUM_CAST(DiscordSDKRelationship, Status);
+}
 
 #endif // DISCORD_SDK_RELATIONSHIP_H

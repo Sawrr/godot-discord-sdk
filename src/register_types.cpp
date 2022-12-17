@@ -17,32 +17,32 @@
 
 using namespace godot;
 
-static DiscordSDK * _discord;
-static DiscordSDKUserManager * _discordUserManager;
-static DiscordSDKRelationshipManager * _discordRelationshipManager;
-static DiscordSDKActivityManager * _discordActivityManager;
+static Discord * _discord;
+static sdk::DiscordUserManager * _discordUserManager;
+static sdk::DiscordRelationshipManager * _discordRelationshipManager;
+static sdk::DiscordActivityManager * _discordActivityManager;
 
 void initialize_discord_module(ModuleInitializationLevel p_level) {
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
 	}
 
-	ClassDB::register_class<DiscordSDK>();
-	ClassDB::register_class<DiscordSDKUser>();
-	ClassDB::register_class<DiscordSDKUserManager>();
-	ClassDB::register_class<DiscordSDKRelationship>();
-	ClassDB::register_class<DiscordSDKRelationshipManager>();
-	ClassDB::register_class<DiscordSDKActivity>();
-	ClassDB::register_class<DiscordSDKActivityManager>();
+	ClassDB::register_class<Discord>();
+	ClassDB::register_class<sdk::DiscordUser>();
+	ClassDB::register_class<sdk::DiscordUserManager>();
+	ClassDB::register_class<sdk::DiscordRelationship>();
+	ClassDB::register_class<sdk::DiscordRelationshipManager>();
+	ClassDB::register_class<sdk::DiscordActivity>();
+	ClassDB::register_class<sdk::DiscordActivityManager>();
 
-	_discord = memnew(DiscordSDK);
-	_discordUserManager = memnew(DiscordSDKUserManager);
-	_discordRelationshipManager = memnew(DiscordSDKRelationshipManager);
-	_discordActivityManager = memnew(DiscordSDKActivityManager);
-	Engine::get_singleton()->register_singleton("DiscordSDK", DiscordSDK::get_singleton());
-	Engine::get_singleton()->register_singleton("DiscordSDKUserManager", DiscordSDKUserManager::get_singleton());
-	Engine::get_singleton()->register_singleton("DiscordSDKRelationshipManager", DiscordSDKRelationshipManager::get_singleton());
-	Engine::get_singleton()->register_singleton("DiscordSDKActivityManager", DiscordSDKActivityManager::get_singleton());
+	_discord = memnew(Discord);
+	_discordUserManager = memnew(sdk::DiscordUserManager);
+	_discordRelationshipManager = memnew(sdk::DiscordRelationshipManager);
+	_discordActivityManager = memnew(sdk::DiscordActivityManager);
+	Engine::get_singleton()->register_singleton("Discord", Discord::get_singleton());
+	Engine::get_singleton()->register_singleton("DiscordUserManager", sdk::DiscordUserManager::get_singleton());
+	Engine::get_singleton()->register_singleton("DiscordRelationshipManager", sdk::DiscordRelationshipManager::get_singleton());
+	Engine::get_singleton()->register_singleton("DiscordActivityManager", sdk::DiscordActivityManager::get_singleton());
 }
 
 void uninitialize_discord_module(ModuleInitializationLevel p_level) {

@@ -1,11 +1,14 @@
 
 #include "discord_sdk_relationship.h"
 
-void DiscordSDKRelationship::_bind_methods() {
-	ClassDB::bind_method(D_METHOD("get_type"), &DiscordSDKRelationship::get_type);
-	ClassDB::bind_method(D_METHOD("get_user"), &DiscordSDKRelationship::get_user);
-	ClassDB::bind_method(D_METHOD("get_status"), &DiscordSDKRelationship::get_status);
-    ClassDB::bind_method(D_METHOD("get_activity"), &DiscordSDKRelationship::get_activity);
+VARIANT_ENUM_CAST(sdk::DiscordRelationship, RelationshipType);
+VARIANT_ENUM_CAST(sdk::DiscordRelationship, Status);
+
+void sdk::DiscordRelationship::_bind_methods() {
+	ClassDB::bind_method(D_METHOD("get_type"), &sdk::DiscordRelationship::get_type);
+	ClassDB::bind_method(D_METHOD("get_user"), &sdk::DiscordRelationship::get_user);
+	ClassDB::bind_method(D_METHOD("get_status"), &sdk::DiscordRelationship::get_status);
+    ClassDB::bind_method(D_METHOD("get_activity"), &sdk::DiscordRelationship::get_activity);
 
     BIND_ENUM_CONSTANT(None);
     BIND_ENUM_CONSTANT(Friend);
@@ -20,18 +23,18 @@ void DiscordSDKRelationship::_bind_methods() {
     BIND_ENUM_CONSTANT(DoNotDisturb);
 }
 
-DiscordSDKRelationship::RelationshipType DiscordSDKRelationship::get_type() {
+sdk::DiscordRelationship::RelationshipType sdk::DiscordRelationship::get_type() {
     return static_cast<RelationshipType>(relationship.GetType());
 }
 
-DiscordSDKUser *DiscordSDKRelationship::get_user() {
-    return memnew(DiscordSDKUser(relationship.GetUser()));
+sdk::DiscordUser *sdk::DiscordRelationship::get_user() {
+    return memnew(sdk::DiscordUser(relationship.GetUser()));
 }
 
-DiscordSDKRelationship::Status DiscordSDKRelationship::get_status() {
+sdk::DiscordRelationship::Status sdk::DiscordRelationship::get_status() {
     return static_cast<Status>(relationship.GetPresence().GetStatus());
 }
 
-DiscordSDKActivity *DiscordSDKRelationship::get_activity() {
-    return memnew(DiscordSDKActivity(relationship.GetPresence().GetActivity()));
+sdk::DiscordActivity *sdk::DiscordRelationship::get_activity() {
+    return memnew(sdk::DiscordActivity(relationship.GetPresence().GetActivity()));
 }

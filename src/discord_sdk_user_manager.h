@@ -11,23 +11,26 @@
 
 using namespace godot;
 
+namespace sdk {
 
-class DiscordSDKUserManager : public Object {
-	GDCLASS(DiscordSDKUserManager, Object);
+class DiscordUserManager : public Object {
+	GDCLASS(DiscordUserManager, Object);
 
-	static DiscordSDKUserManager *singleton;
+	static sdk::DiscordUserManager *singleton;
 
 protected:
 	static void _bind_methods();
 
 public:
-	static DiscordSDKUserManager *get_singleton();
-	DiscordSDKUser *get_current_user();
+	static sdk::DiscordUserManager *get_singleton();
+	sdk::DiscordUser *get_current_user();
 	void get_user(int64_t user_id, Callable callback);
 	void on_current_user_update(Callable callback);
 
-	DiscordSDKUserManager();
-	~DiscordSDKUserManager();
+	DiscordUserManager();
+	~DiscordUserManager();
 };
+
+}
 
 #endif // DISCORD_SDK_USER_MANAGER_H

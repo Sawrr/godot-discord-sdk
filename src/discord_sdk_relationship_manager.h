@@ -11,27 +11,30 @@
 
 using namespace godot;
 
+namespace sdk {
 
-class DiscordSDKRelationshipManager : public Object {
-	GDCLASS(DiscordSDKRelationshipManager, Object);
+class DiscordRelationshipManager : public Object {
+	GDCLASS(DiscordRelationshipManager, Object);
 
-	static DiscordSDKRelationshipManager *singleton;
+	static sdk::DiscordRelationshipManager *singleton;
 
 protected:
 	static void _bind_methods();
 
 public:
-	static DiscordSDKRelationshipManager *get_singleton();
+	static sdk::DiscordRelationshipManager *get_singleton();
 	void filter(Callable condition);
-	DiscordSDKRelationship *get(int64_t user_id);
-	DiscordSDKRelationship *get_at(uint32_t index);
+	sdk::DiscordRelationship *get(int64_t user_id);
+	sdk::DiscordRelationship *get_at(uint32_t index);
 	int32_t count();
 	
 	void on_refresh(Callable callback);
 	void on_relationship_update(Callable callback);
 
-	DiscordSDKRelationshipManager();
-	~DiscordSDKRelationshipManager();
+	DiscordRelationshipManager();
+	~DiscordRelationshipManager();
 };
+
+}
 
 #endif // DISCORD_SDK_RELATIONSHIP_MANAGER_H

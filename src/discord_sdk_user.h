@@ -9,8 +9,10 @@
 
 using namespace godot;
 
-class DiscordSDKUser : public RefCounted {
-    GDCLASS(DiscordSDKUser, RefCounted);
+namespace sdk {
+
+class DiscordUser : public RefCounted {
+    GDCLASS(DiscordUser, RefCounted);
 
     discord::User user{};
 
@@ -29,10 +31,12 @@ class DiscordSDKUser : public RefCounted {
         void set_bot(bool bot);
         bool get_bot();
 
-        DiscordSDKUser() {}
-        DiscordSDKUser(discord::User usr) {
+        DiscordUser() {}
+        DiscordUser(discord::User usr) {
             user = usr;
         }
 };
+
+}
 
 #endif // DISCORD_SDK_USER_H
