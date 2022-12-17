@@ -11,10 +11,10 @@ jobs:
           submodules: recursive
       - name: Get Discord GameSDK and extract libs
         run: |
-          curl https://dl-game-sdk.discordapp.net/2.5.6/discord_game_sdk.zip --output sdk.zip
-          7z x sdk.zip
+          curl https://dl-game-sdk.discordapp.net/2.5.6/discord_game_sdk.zip --output discord_game_sdk.zip
+          7z x discord_game_sdk.zip -o sdk
           mkdir addons/discord/bin
-          cp sdk/lib/x64_86/* addons/discord/bin/
+          cp sdk/discord_game_sdk/lib/x64_86/* addons/discord/bin/
       - name: Install Build Requirements
         run: |
           python --version
