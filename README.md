@@ -14,10 +14,11 @@ Only some features are implemented as much of the SDK is deprecated.
 - Activity
   - Rich Presence
   - Invites, Ask to Join
+  - Register application launch command / steam id
 - Relationship
   - Get friends list
 - User
-  - Get user info, such as name and avatar
+  - Get user info, such as name and avatar URL
 
 ## How to build
 
@@ -45,15 +46,16 @@ Initialize Discord using your app id:
     
     var discord_ready = true
 
-Run callbacks every tick:
+then run callbacks every tick:
 
     func _process(_delta):
         if discord_ready:
             Discord.run_callbacks()
 
 
+Note: you can use lambda functions for callbacks
 
-### Use lambda functions for callbacks
+### Examples
 
 Logging:
 
