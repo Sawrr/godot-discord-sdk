@@ -29,7 +29,6 @@ else:
 (extension_path,) = glob("addons/*/*.gdextension")
 addon_path = Path(extension_path).parent
 project_name = Path(extension_path).stem
-debug_or_release = "release" if env["target"] == "template_release" else "template_debug"
 
 if env["platform"] == "macos":
     library = env.SharedLibrary(
@@ -37,7 +36,7 @@ if env["platform"] == "macos":
             addon_path,
             project_name,
             env["platform"],
-            debug_or_release,
+            env["target"],
         ),
         source=sources,
     )
@@ -47,7 +46,7 @@ else:
             addon_path,
             project_name,
             env["platform"],
-            debug_or_release,
+            env["target"],
             env["arch"],
             env["SHLIBSUFFIX"],
         ),
