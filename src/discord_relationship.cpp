@@ -1,8 +1,8 @@
 
 #include "discord_relationship.h"
 
-VARIANT_ENUM_CAST(sdk::DiscordRelationship, RelationshipType);
-VARIANT_ENUM_CAST(sdk::DiscordRelationship, Status);
+VARIANT_ENUM_CAST(sdk::DiscordRelationship::RelationshipType);
+VARIANT_ENUM_CAST(sdk::DiscordRelationship::Status);
 
 void sdk::DiscordRelationship::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("get_type"), &sdk::DiscordRelationship::get_type);

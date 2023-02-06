@@ -92,8 +92,8 @@ public:
 	~Discord();
 };
 
-VARIANT_ENUM_CAST(Discord, CreateFlags);
-VARIANT_ENUM_CAST(Discord, Result);
-VARIANT_ENUM_CAST(Discord, LogLevel);
+VARIANT_ENUM_CAST(Discord::CreateFlags);
+VARIANT_ENUM_CAST(Discord::Result);
+VARIANT_ENUM_CAST(Discord::LogLevel);
 
 #endif // DISCORD_SDK_H

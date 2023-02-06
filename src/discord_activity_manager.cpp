@@ -2,8 +2,8 @@
 
 using namespace godot;
 
-VARIANT_ENUM_CAST(sdk::DiscordActivityManager, ActivityJoinRequestReply);
-VARIANT_ENUM_CAST(sdk::DiscordActivityManager, ActivityActionType);
+VARIANT_ENUM_CAST(sdk::DiscordActivityManager::ActivityJoinRequestReply);
+VARIANT_ENUM_CAST(sdk::DiscordActivityManager::ActivityActionType);
 
 sdk::DiscordActivityManager *sdk::DiscordActivityManager::singleton = nullptr;
 
