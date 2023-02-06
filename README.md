@@ -2,7 +2,7 @@
 
 ## Description
 
-Addon for Discord integration, built for Godot 4.0 beta 10 as a GDExtension
+Addon for Discord integration, built for Godot 4.0 beta 17 as a GDExtension
 
 Uses Discord GameSDK version v2.5.6
 (At the time of writing, the latest version v3.2.1 had a bug with ClearActivity)
