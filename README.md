@@ -9,7 +9,6 @@ Uses Discord GameSDK version v2.5.6
 
 ### Todo list:
 - linux, macos Github Action workflows
-- publish a release
 
 ## Features implemented
 
